@@ -24,71 +24,70 @@
 
 </html>
 <script>
-var gallery =  function (mas) {
-	var to = -1;
-	var mainImg = document.getElementById("largeImg");
+var gallery = function (mas) {
+	var self = this;
+	self.mas = [];
+	self.image = document.getElementById("largeImg");
+	self.number = -1;
 
 	var openImagePopup = function(elem) {
-		mainImg.src = elem.href;
+		self.image.src = elem.href;
 	};
-
-
 
 	var addEvent = function (type, element) {
 		element.addEventListener(type, function(e) {
 		e.preventDefault();
 		openImagePopup(element)
 		}, false);
-	} 	
+	};
 	
 	var right_arrow = function () { 
-		console.log('mas',  mas);
-		  if (to < mas.length-1)  to++ 
+		  if (number < self.mas.length-1)  number++ 
 		   else
-			 to = 0;
-		if (!mainImg)
-			var mainImg = document.getElementById("largeImg");
-		mainImg.src = mas[to];
+			 number = 0;
+		self.image.src = self.mas[number];
 	};
 
 	var left_arrow = function() {     
-		if (to > 0) to--;
+		if (number > 0) number--;
 		  else
-			to = mas.length-1;
-		if (!mainImg)
-			var mainImg = document.getElementById("largeImg");
-		mainImg.src = mas[to];
+			number = self.mas.length-1;
+		self.image.src = self.mas[number];
 	};
- return {
-	init: function(param) {
-		if (!param.type) type = 'click';
-		var tag = document.getElementsByTagName('a');
-		
-		for (var i=0; i < tag.length; i++ ) {
-		//	mas.push(tag[i].href);
-			addEvent(param.type, tag[i]);
-		}
-
-		var left = document.getElementById('left');
-		var right = document.getElementById('right');
-		left.onclick = function() {
-			return left_arrow()
-		};
-		right.onclick = function() {
-			return right_arrow()
-		};
+	
+	return {
+		init: function(settings) {
+			if (!settings.type) type = 'click';
+			if (!settings.elementId) return false;
+			
+			var elementId = document.getElementById(settings.elementId);
+			var elem = elementId.children;
+			
+			for (var i=0; i < elem.length; i++ ) {
+				self.mas.push(elem[i].href);
+				addEvent(settings.type, elem[i]);
+			}
+			
+			// custom
+			if (settings.arrow) {
+				var left = document.getElementById('left');
+				var right = document.getElementById('right');
+				left.onclick = function() {
+					return left_arrow()
+				};
+				right.onclick = function() {
+					return right_arrow()
+				};
+			}
 		}
 	}
 }
 
-
 //-----------------
-var arr = ["https://js.cx/gallery/img3-lg.jpg",
-	"https://js.cx/gallery/img4-lg.jpg", "https://js.cx/gallery/img5-lg.jpg",
-	"https://js.cx/gallery/img6-lg.jpg"];
-//call
-gallery(arr).init({
-	type: 'click'
+gallery().init({
+	elementId: 'thumbs',
+	type: 'click',
+	arrow: true
 });
 
 </script>
