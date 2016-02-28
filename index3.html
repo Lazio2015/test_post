@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Galery</title>
+  <meta charset="utf-8">
+</head>
+
+<body>
+
+  <p><img id="largeImg" src="https://js.cx/gallery/img1-lg.jpg" alt="Large image"></p>
+	<img id="left" src = "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQO_CPKxg6fxG5EWymZaU_sLhwDXfXyUlV89CGnSzNLWeRaS9uGCA"/>
+	<img id="right" src = "http://gogirocentral.com/css/green/img/icons/25x25/blue/bended-arrow-right.png" />
+
+  <div id="thumbs">
+    <a href="https://js.cx/gallery/img3-lg.jpg" title="Image 2"><img src="https://js.cx/gallery/img2-thumb.jpg"></a>
+    <a href="https://js.cx/gallery/img4-lg.jpg" title="Image 3"><img src="https://js.cx/gallery/img3-thumb.jpg"></a>
+    <a href="https://js.cx/gallery/img5-lg.jpg" title="Image 4"><img src="https://js.cx/gallery/img4-thumb.jpg"></a>
+    <a href="https://js.cx/gallery/img6-lg.jpg" title="Image 5"><img src="https://js.cx/gallery/img5-thumb.jpg"></a>
+    <a href="https://js.cx/gallery/img4-lg.jpg" title="Image 6"><img src="https://js.cx/gallery/img6-thumb.jpg"></a>
+  </div>
+
+</body>
+
+</html>
+<script>
+var gallery =  function (mas) {
+	var to = -1;
+	var mainImg = document.getElementById("largeImg");
+
+	var openImagePopup = function(elem) {
+		mainImg.src = elem.href;
+	};
+
+
+
+	var addEvent = function (type, element) {
+		element.addEventListener(type, function(e) {
+		e.preventDefault();
+		openImagePopup(element)
+		}, false);
+	} 	
+	
+	var right_arrow = function () { 
+		console.log('mas',  mas);
+		  if (to < mas.length-1)  to++ 
+		   else
+			 to = 0;
+		if (!mainImg)
+			var mainImg = document.getElementById("largeImg");
+		mainImg.src = mas[to];
+	};
+
+	var left_arrow = function() {     
+		if (to > 0) to--;
+		  else
+			to = mas.length-1;
+		if (!mainImg)
+			var mainImg = document.getElementById("largeImg");
+		mainImg.src = mas[to];
+	};
+ return {
+	init: function(param) {
+		if (!param.type) type = 'click';
+		var tag = document.getElementsByTagName('a');
+		
+		for (var i=0; i < tag.length; i++ ) {
+		//	mas.push(tag[i].href);
+			addEvent(param.type, tag[i]);
+		}
+
+		var left = document.getElementById('left');
+		var right = document.getElementById('right');
+		left.onclick = function() {
+			return left_arrow()
+		};
+		right.onclick = function() {
+			return right_arrow()
+		};
+		}
+	}
+}
+
+
+//-----------------
+var arr = ["https://js.cx/gallery/img3-lg.jpg",
+	"https://js.cx/gallery/img4-lg.jpg", "https://js.cx/gallery/img5-lg.jpg",
+	"https://js.cx/gallery/img6-lg.jpg"];
+//call
+gallery(arr).init({
+	type: 'click'
+});
+
+</script>
