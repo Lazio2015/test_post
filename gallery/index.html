@@ -42,7 +42,7 @@
 </head>
 
 <body>
-
+<a href="#win" title="title"> Start </a>
 </body>
 
 </html>
@@ -53,171 +53,107 @@
 		"http://all4desktop.com/data_images/wallpapers/out/345343.jpg",
 		"https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSgXx8uPiVkelYVbt3HG-xgEOPCR5GMZUr8xJO5trF9OAhFiv9mIg"
 	];
-modules.gallery(function(){
-
-})();
 
 var Gallery = (function() {
 	function Gallery (options) {
-//		this.arr = options.arr;
-		this.imagesArray = [];
-		this.imageBlockId = options.image;
+		this.arr = options.arr ? options.arr : [];
+		this.imageBlockId = options.image ? options.image : '';
 		this.number = -1;
 	}
 
-	Gallery.prototype.buildImages = function() {
+	Gallery.prototype.initImageByBlock = function() {
 		this.imageBlock =  document.getElementById(this.imageBlockId);
 		var images = imageBlock.getElementsByTagName('img');
 		for (var i=0; i < images.length; i++ ) {
-			this.imagesArray.push(images[i].src);
+			this.arr.push(images[i].src);
 		}
 	}
 
-	Gallery.prototype.render = function () {
+	// Gallery.prototype.render = function () {
+	// 	this.div = document.createElement("div");
+	// 	this.image = document.createElement("img");
+	// 	this.overlay = document.createElement("a");
+
+	// 	this.image.className = 'is-image';
+	// 	this.image.id = 'activeImg';
+
+	// 	this.overlay.href = '#x';
+	// 	this.overlay.className = 'overlay';
+	// 	this.overlay.id = 'win';
+
+	// 	this.div.className = 'popup';
+	// 	this.div.id = 'mainImg';
+	// 	this.div.innerHTML = '<p class="arrow-left" onclick=""> << </p>'
+	// 			+ this.image.outerHTML +
+	// 			'<a class="close" title="close" href="#close"></a>' +
+	// 			'<p class="arrow-right" >> </p>';
+	// 	document.body.appendChild(this.overlay);
+	// 	document.body.appendChild(this.div);
+
+	// 	var a = document.createElement('a');
+	// 	a.onclick = function() {return gallery.openImagePopup('https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS6ohiCZ5GBPAXQqUfbANS2zw9yNNjCFHOhlytAyv0c9H_RktmGeA')};
+	// 	a.href ="#win" ;
+	// 	var t = document.createTextNode("CLICK ME");       // Create a text node
+	// 	a.appendChild(t);
+	// 	document.body.appendChild(a);
+	// }
+
+	Gallery.prototype.open = function (element) {
+
+		console.log('here');
+	};
+
+	Gallery.prototype.right_arrow = function(to) {
+		if (to < this.arr.length-1)  to++
+		else
+			to = 0;
+		this.open(this.arr[to]);
+	};
+
+	Gallery.prototype.left_arrow = function (to) {
+		if (to < this.arr.length-1)  to++
+		else
+			to = 0;
+		this.open(this.arr[to]);
+	};
+
+	return Gallery;
+})();
+
+var PopUp = (function() {
+	function PopUp() {
 		this.div = document.createElement("div");
-		this.image = document.createElement("img");
+		this.div.className = 'popup';
+		this.div.id = 'popUp';
+		this.close = '<a class="close" title="close" href="#close"></a>';
+		this.show = false;
+
+		//overlay
 		this.overlay = document.createElement("a");
-
-		this.image.className = 'is-image';
-		this.image.id = 'activeImg';
-
 		this.overlay.href = '#x';
 		this.overlay.className = 'overlay';
 		this.overlay.id = 'win';
-
-		this.div.className = 'popup';
-		this.div.id = 'mainImg';
-		this.div.innerHTML = '<p class="arrow-left" onclick=""> << </p>'
-				+ this.image.outerHTML +
-				'<a class="close" title="close" href="#close"></a>' +
-				'<p class="arrow-right" >> </p>';
 		document.body.appendChild(this.overlay);
-		document.body.appendChild(this.div);
-
-		var a = document.createElement('a');
-		a.onclick = function() {return gallery.openImagePopup('https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS6ohiCZ5GBPAXQqUfbANS2zw9yNNjCFHOhlytAyv0c9H_RktmGeA')};
-		a.href ="#win" ;
-		var t = document.createTextNode("CLICK ME");       // Create a text node
-		a.appendChild(t);
-		document.body.appendChild(a);
 	}
 
-	Gallery.prototype.openImagePopup = function (src) {
-		console.log('heer');
-		this.activeImg = document.getElementById('activeImg');
-		this.activeImg.src = src;
-	};
+	PopUp.prototype.open = function (element) {
+		this.div.innerHTML = element + this.close;
+		this.show = true;
+		document.body.appendChild(this.div);
+	}
 
-	Gallery.prototype.right_arrow = function() {
-		if (to < arr.length-1)  to++
-		else
-			to = 0;
-		this.openImagePopup(arr[to]);
-	};
+	PopUp.prototype.close = function () {
+		this.div.innerHTML = '';
+		this.show = false;
+	}
 
-	Gallery.prototype.left_arrow = function () {
-		if (to < arr.length-1)  to++
-		else
-			to = 0;
-		this.openImagePopup(arr[to]);
-	};
+	return PopUp;
+})();
 
-//	var obj = new Gallery({arr: arr1, image: 'imageBlock'});
-//	obj.buildImages();
-//	obj.render();
-//	console.dir(obj);
-
-	return Gallery;
-})(arr1);
-
-//
-//var gallery =  function (mas) {
-//	var to = -1;
-//	var div = document.createElement("div");
-//	var image = document.createElement("img");
-//	var overlay = document.createElement("a");
-//	var a = document.createElement("a");
-////	var mainImg = document.getElementById("mainImg");
-//
-//	var openImagePopup = function(elem) {
-//
-//		image.src = elem.children[0].src;
-//		image.className = 'is-image';
-//
-//		overlay.href = '#x';
-//		overlay.className = 'overlay';
-//		overlay.id = 'win';
-//
-//		a.className = 'close';
-//		a.title = 'close';
-//		a.href="#close"
-//
-//		div.className = 'popup';
-//		div.id = 'mainImg';
-//
-//		div.innerHTML = '<p class="arrow-left"><<</p>'
-//				+ image.outerHTML + a.outerHTML +
-//				'<p class="arrow-right">>></p>';
-//		document.body.appendChild(overlay);
-//		document.body.appendChild(div);
-//	};
-//
-//	var left = document.getElementById('left');
-//	var right = document.getElementById('right');
-////		left.onclick = function() {
-////			return left_arrow()
-////		};
-////		right.onclick = function() {
-////			return right_arrow()
-////		};
-//
-//	var addEvent = function (type, element) {
-//		element.addEventListener(type, function (e) {
-//			//	e.preventDefault();
-//			openImagePopup(element)
-//		}, false);
-//	}
-//
-//	var right_arrow = function () {
-//		console.log('mas',  mas);
-//		  if (to < mas.length-1)  to++
-//		   else
-//			 to = 0;
-//		if (!mainImg)
-//			var mainImg = document.getElementById("mainImg");
-//		mainImg.src = mas[to];
-//	};
-//
-//	var left_arrow = function() {
-//		if (to > 0) to--;
-//		  else
-//			to = mas.length-1;
-//		if (!mainImg)
-//			var mainImg = document.getElementById("mainImg");
-//		mainImg.src = mas[to];
-//	};
-// return {
-//	init: function(param) {
-//		if (!param.type) type = 'click';
-//		var tag = document.getElementsByTagName('a');
-//
-//		for (var i=0; i < tag.length; i++ ) {
-//		//	mas.push(tag[i].href);
-//			addEvent(param.type, tag[i]);
-//		}
-//		}
-//	}
-//}
-
-
-//-----------------
-//var arr = ["https://js.cx/gallery/img3-lg.jpg",
-//	"https://js.cx/gallery/img4-lg.jpg", "https://js.cx/gallery/img5-lg.jpg",
-//	"https://js.cx/gallery/img6-lg.jpg"];
-//call
-//call
-//gallery(arr).init({
-//	type: 'click'
-//});
+var gallery = new Gallery({arr: arr1, image: 'imageBlock'});
+var popUp = new PopUp();
+console.dir(gallery);
+console.dir(popUp);
+popUp.open('<img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS6ohiCZ5GBPAXQqUfbANS2zw9yNNjCFHOhlytAyv0c9H_RktmGeA"/>');
 
 </script>
