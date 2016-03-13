@@ -3,8 +3,8 @@
 
 <head>
   <title>Galery</title>
-  <link rel="stylesheet" type="text/css" href="gallery.css">
- <link rel="stylesheet" type="text/css" href="template.css">
+  <link rel="stylesheet" type="text/css" href="css/gallery.css">
+ <link rel="stylesheet" type="text/css" href="css/template.css">
   <meta charset="utf-8">
 	<style>
 		.arrow-right {
@@ -42,10 +42,24 @@
 </head>
 
 <body>
+<button id="xz">Click me</button>
+
 <a href="#win" title="title"> Start </a>
+
+  <div id="thumbs">
+    <a href="https://js.cx/gallery/img3-lg.jpg" title="Image 2"><img src="https://js.cx/gallery/img2-thumb.jpg"></a>
+    <a href="https://js.cx/gallery/img4-lg.jpg" title="Image 3"><img src="https://js.cx/gallery/img3-thumb.jpg"></a>
+    <a href="https://js.cx/gallery/img5-lg.jpg" title="Image 4"><img src="https://js.cx/gallery/img4-thumb.jpg"></a>
+    <a href="https://js.cx/gallery/img6-lg.jpg" title="Image 5"><img src="https://js.cx/gallery/img5-thumb.jpg"></a>
+    <a href="https://js.cx/gallery/img4-lg.jpg" title="Image 6"><img src="https://js.cx/gallery/img6-thumb.jpg"></a>
+  </div>
 </body>
 
 </html>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="app.js"></script>
+<script type="text/javascript" src="gallery.js"></script>
+<script type="text/javascript" src="popup.js"></script>
 <script>
 	var arr1 = [ "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS6ohiCZ5GBPAXQqUfbANS2zw9yNNjCFHOhlytAyv0c9H_RktmGeA",
 		"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgSXX1H1KZhkoN7iGvojgf8PjKi85s7RVEIcwGp2_0UWQy_sFO",
@@ -54,106 +68,15 @@
 		"https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSgXx8uPiVkelYVbt3HG-xgEOPCR5GMZUr8xJO5trF9OAhFiv9mIg"
 	];
 
-var Gallery = (function() {
-	function Gallery (options) {
-		this.arr = options.arr ? options.arr : [];
-		this.imageBlockId = options.image ? options.image : '';
-		this.number = -1;
-	}
 
-	Gallery.prototype.initImageByBlock = function() {
-		this.imageBlock =  document.getElementById(this.imageBlockId);
-		var images = imageBlock.getElementsByTagName('img');
-		for (var i=0; i < images.length; i++ ) {
-			this.arr.push(images[i].src);
-		}
-	}
-
-	// Gallery.prototype.render = function () {
-	// 	this.div = document.createElement("div");
-	// 	this.image = document.createElement("img");
-	// 	this.overlay = document.createElement("a");
-
-	// 	this.image.className = 'is-image';
-	// 	this.image.id = 'activeImg';
-
-	// 	this.overlay.href = '#x';
-	// 	this.overlay.className = 'overlay';
-	// 	this.overlay.id = 'win';
-
-	// 	this.div.className = 'popup';
-	// 	this.div.id = 'mainImg';
-	// 	this.div.innerHTML = '<p class="arrow-left" onclick=""> << </p>'
-	// 			+ this.image.outerHTML +
-	// 			'<a class="close" title="close" href="#close"></a>' +
-	// 			'<p class="arrow-right" >> </p>';
-	// 	document.body.appendChild(this.overlay);
-	// 	document.body.appendChild(this.div);
-
-	// 	var a = document.createElement('a');
-	// 	a.onclick = function() {return gallery.openImagePopup('https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS6ohiCZ5GBPAXQqUfbANS2zw9yNNjCFHOhlytAyv0c9H_RktmGeA')};
-	// 	a.href ="#win" ;
-	// 	var t = document.createTextNode("CLICK ME");       // Create a text node
-	// 	a.appendChild(t);
-	// 	document.body.appendChild(a);
-	// }
-
-	Gallery.prototype.open = function (element) {
-
-		console.log('here');
-	};
-
-	Gallery.prototype.right_arrow = function(to) {
-		if (to < this.arr.length-1)  to++
-		else
-			to = 0;
-		this.open(this.arr[to]);
-	};
-
-	Gallery.prototype.left_arrow = function (to) {
-		if (to < this.arr.length-1)  to++
-		else
-			to = 0;
-		this.open(this.arr[to]);
-	};
-
-	return Gallery;
-})();
-
-var PopUp = (function() {
-	function PopUp() {
-		this.div = document.createElement("div");
-		this.div.className = 'popup';
-		this.div.id = 'popUp';
-		this.close = '<a class="close" title="close" href="#close"></a>';
-		this.show = false;
-
-		//overlay
-		this.overlay = document.createElement("a");
-		this.overlay.href = '#x';
-		this.overlay.className = 'overlay';
-		this.overlay.id = 'win';
-		document.body.appendChild(this.overlay);
-	}
-
-	PopUp.prototype.open = function (element) {
-		this.div.innerHTML = element + this.close;
-		this.show = true;
-		document.body.appendChild(this.div);
-	}
-
-	PopUp.prototype.close = function () {
-		this.div.innerHTML = '';
-		this.show = false;
-	}
-
-	return PopUp;
-})();
-
-var gallery = new Gallery({arr: arr1, image: 'imageBlock'});
-var popUp = new PopUp();
+var gallery = new Gallery({arr: arr1, image: 'thumbs'});
+gallery.initImageByBlock();
+// var popUp = new PopUp();
+// popUp.init();
 console.dir(gallery);
 console.dir(popUp);
-popUp.open('<img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS6ohiCZ5GBPAXQqUfbANS2zw9yNNjCFHOhlytAyv0c9H_RktmGeA"/>');
+//popUp.open('<img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS6ohiCZ5GBPAXQqUfbANS2zw9yNNjCFHOhlytAyv0c9H_RktmGeA"/>');
+var popUp = new PopUp();
 
+$('#xz').on('click', function() {popUp.show('<h2>Title</h2> <br> Hello world');})
 </script>

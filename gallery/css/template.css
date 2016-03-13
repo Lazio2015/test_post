@@ -12,12 +12,12 @@
     cursor: default; /* тип курсара */
 }
 /* активируем слой затемнения */
-.overlay:target {
-    display: block;
-}
+/*.overlay:target; {
+    display: none;
+}*/
 /* стили модального окна */
 .popup {
-    top: -100%;
+    top: 50%;
     right: 0;
     left: 50%;
     font-size: 14px;
@@ -42,23 +42,23 @@
     -moz-box-shadow: 0 15px 20px rgba(0,0,0,.22),0 19px 60px rgba(0,0,0,.3);
     -ms-box-shadow: 0 15px 20px rgba(0,0,0,.22),0 19px 60px rgba(0,0,0,.3);
     box-shadow: 0 15px 20px rgba(0,0,0,.22),0 19px 60px rgba(0,0,0,.3);
-    -webkit-transform: translate(-50%, -500%);
-    -ms-transform: translate(-50%, -500%);
-    -o-transform: translate(-50%, -500%);
-    transform: translate(-50%, -500%);
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
     -webkit-transition: -webkit-transform 0.6s ease-out;
     -moz-transition: -moz-transform 0.6s ease-out;
     -o-transition: -o-transform 0.6s ease-out;
     transition: transform 0.6s ease-out;
 }
 /* активируем модальный блок */
-.overlay:target+.popup {
-    -webkit-transform: translate(-50%, 0);
-    -ms-transform: translate(-50%, 0);
-    -o-transform: translate(-50%, 0);
-    transform: translate(-50%, 0);
-    top: 20%;
-}
+/*.overlay:target+.popup {
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+	display: block;
+}*/
 /* формируем кнопку закрытия */
 .close {
     top: -10px;
