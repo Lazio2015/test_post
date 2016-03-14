@@ -7,19 +7,12 @@
  <link rel="stylesheet" type="text/css" href="css/template.css">
   <meta charset="utf-8">
 	<style>
-		.arrow-right {
-			font-weight:300;
-			font-family:Sans-Serif;
-			position:absolute;
-			pointer-events:none;
-			right:30px;
-			top:46%;
-			color: #EEE;
-			font-size:4.0em;
-			background-color:rgba(0,0,0,0.5);
-			padding:0px 7px;
-			border-radius:5px;
-			line-height: 1.2em;
+		.arrow-left:before {
+			content: "<<";
+		}
+
+		.arrow-right:before {
+			content: ">>";
 		}
 
 		.arrow-left {
@@ -33,10 +26,21 @@
 			color: #EEE;
 			font-size:4.0em;
 			background-color:rgba(0,0,0,0.5);
-			padding:0px 22px 0 7px;
-			border-radius:5px;
+			border-radius:7px;
 			line-height: 1.2em;
-			width: 30px;
+		}
+		.arrow-right {
+			font-weight:300;
+			font-family:Sans-Serif;
+			position:absolute;
+			pointer-events:none;
+			right:30px;
+			top:46%;
+			color: #EEE;
+			font-size:4.0em;
+			background-color:rgba(0,0,0,0.5);
+			border-radius:7px;
+			line-height: 1.2em;
 		}
 	</style>
 </head>
@@ -52,6 +56,8 @@
     <a href="https://js.cx/gallery/img5-lg.jpg" title="Image 4"><img src="https://js.cx/gallery/img4-thumb.jpg"></a>
     <a href="https://js.cx/gallery/img6-lg.jpg" title="Image 5"><img src="https://js.cx/gallery/img5-thumb.jpg"></a>
     <a href="https://js.cx/gallery/img4-lg.jpg" title="Image 6"><img src="https://js.cx/gallery/img6-thumb.jpg"></a>
+    <img src="https://js.cx/gallery/img6-thumb.jpg">
+    <img src="https://js.cx/gallery/img4-lg.jpg">
   </div>
 </body>
 
@@ -68,15 +74,12 @@
 		"https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSgXx8uPiVkelYVbt3HG-xgEOPCR5GMZUr8xJO5trF9OAhFiv9mIg"
 	];
 
-
-var gallery = new Gallery({arr: arr1, image: 'thumbs'});
-gallery.initImageByBlock();
-// var popUp = new PopUp();
-// popUp.init();
+var gallery = new Gallery({arr: [], imageBlockId: 'thumbs'});
+var popUp = new PopUp();
+gallery.init();
 console.dir(gallery);
 console.dir(popUp);
 //popUp.open('<img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS6ohiCZ5GBPAXQqUfbANS2zw9yNNjCFHOhlytAyv0c9H_RktmGeA"/>');
-var popUp = new PopUp();
 
-$('#xz').on('click', function() {popUp.show('<h2>Title</h2> <br> Hello world');})
+// $('#xz').on('click', function() {gallery.init()})
 </script>

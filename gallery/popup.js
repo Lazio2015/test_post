@@ -7,7 +7,7 @@ var PopUp = (function() {
         var self = this;
 
     	this._iconClose = '<a class="close" title="close" href="#close"></a>';
-        this._overlay = $('<div class="overlay"><div class="popup" id="close"></div></div>').appendTo(document.body);
+        this._overlay = $('<div class="overlay"><div class="popup"></div></div>').appendTo(document.body);
         this._popup = this._overlay.find('.popup');
 
         this._overlay.on('click', function() { self.hide(); });
@@ -15,10 +15,12 @@ var PopUp = (function() {
     };
 
     PopUp.prototype.show = function(content) {
+        this._popup.html('');
     	  if (typeof content === 'string') {
            this._popup.html(this._iconClose + content);
         } else {
-         	 this._popup.append(this._iconClose + content);
+             this._popup.append(content);
+         	 this._popup.append(this._iconClose);
         }
         this._overlay.css({display: 'block'});
     };
