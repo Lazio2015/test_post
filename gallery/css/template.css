@@ -147,5 +147,11 @@ img:hover {
     cursor:pointer;
 }
 
+.popup img {
+    max-width: 400px;
+    max-height: 400px;
+    margin:0 auto;
+    display: block;
+}
 	
 	

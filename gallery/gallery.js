@@ -29,7 +29,8 @@ var Gallery = (function() {
 	};
 
 	Gallery.prototype.left_arrow = function () {
-		if (this.position > 0)  this.position
+		console.log('this.position', this.position);
+		if (this.position > 0)  this.position--
 		else
 			this.position = this.arr.length-1;
 		this.openIn(this.arr[this.position]);
@@ -38,14 +39,15 @@ var Gallery = (function() {
 	Gallery.prototype.event = function () {
 		var self = this;
 			$('#' + this.imageBlockId + ' ' + 'img').on('click', function(e) {
-				var element = '<button class="arrow-left"></button>' + jQuery(this).context.outerHTML +'<button class="arrow-right"></button>';
+				var element = jQuery(this).context.outerHTML;
+				var elementWithArrow = '<button class="arrow-left"></button>' + element +'<button class="arrow-right"></button>';
 				e.preventDefault();
-				this.position = self.arr.indexOf(this);
-				self.openIn(element);
+				self.position = self.arr.indexOf(element);
+				self.openIn(elementWithArrow);
 			});
 
 			$(".popup").on('click', function(e) {
-				console.log('click');
+				console.log('click11');
 				self.left_arrow();
 			});
 	}
