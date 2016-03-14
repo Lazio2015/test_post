@@ -29,9 +29,9 @@ var Gallery = (function() {
 	};
 
 	Gallery.prototype.left_arrow = function () {
-		if (this.position < this.arr.length-1)  this.position++
+		if (this.position > 0)  this.position
 		else
-			this.position = 0;
+			this.position = this.arr.length-1;
 		this.openIn(this.arr[this.position]);
 	};
 
