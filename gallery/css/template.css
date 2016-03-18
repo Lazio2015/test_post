@@ -148,7 +148,7 @@ img:hover {
 }
 
 .popup img {
-    max-width: 400px;
+//    max-width: 400px;
     max-height: 400px;
     margin:0 auto;
     display: block;
