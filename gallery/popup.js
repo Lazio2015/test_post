@@ -6,19 +6,21 @@ var PopUp = (function() {
     PopUp.prototype.init = function() {
         var self = this;
 
-    	this._iconClose = '<a class="close" title="close" href="#close"></a>';
-        this._overlay = $('<div class="overlay"><div class="popup" id="close"></div></div>').appendTo(document.body);
+        var TEMPLATE = '<div class="overlay"><div class="popup"><a class="close" title="close" href="#close"></a><div class="popup-content"></div></div></div>';
+        this._overlay = $(TEMPLATE).appendTo(document.body);
         this._popup = this._overlay.find('.popup');
+        this._popupContent = this._overlay.find('.popup-content');
 
         this._overlay.on('click', function() { self.hide(); });
         this._popup.on('click', function(e) { e.stopPropagation(); });
     };
 
     PopUp.prototype.show = function(content) {
+        //this._popupContent.html('');
     	  if (typeof content === 'string') {
-           this._popup.html(this._iconClose + content);
+           this._popupContent.html(content);
         } else {
-         	 this._popup.append(this._iconClose + content);
+             this._popupContent.append(content);
         }
         this._overlay.css({display: 'block'});
     };

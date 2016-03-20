@@ -1,49 +1,61 @@
 var Gallery = (function() {
 	function Gallery (options) {
 		this.arr = options.arr ? options.arr : [];
-		this.imageBlockId = options.image ? options.image : '';
-		this.number = -1;
-		this.el = 'idBlock';
+		this.imageBlockId = options.imageBlockId ? options.imageBlockId : '';
+		this.position = -1;
+
 	}
 
-	Gallery.prototype.initImageByBlock = function() {
-		// this.imageBlock =  document.getElementById(this.imageBlockId);
-		// var images = imageBlock.getElementsByTagName('img');
-		// for (var i=0; i < images.length; i++ ) {
-		// 	this.arr.push(images[i].src);
-		// }
+	Gallery.prototype.init = function() {
 
+		this.imageBlock =  document.getElementById(this.imageBlockId);
+		var images = this.imageBlock.getElementsByTagName('img');
+		for (var i=0; i < images.length; i++ ) {
+			this.arr.push(images[i].outerHTML);
+		}
 		this.event();
 	}
-	
-	Gallery.prototype.subscribe = function() {
-		
-	}
 
-	Gallery.prototype.open = function (element) {
+	Gallery.prototype.openIn = function (element) {
+		var elementWithArrow = '<button class="arrow-left"> << </button>' + element +'<button class="arrow-right"> >> </button>';
+		popUp.show(elementWithArrow);
 
-		console.log('here');
+		this.event();
 	};
 
-	Gallery.prototype.right_arrow = function(to) {
-		if (to < this.arr.length-1)  to++
+	Gallery.prototype.rightArrow = function() {
+		console.log('r', this.position);
+		if (this.position < this.arr.length-1)  this.position++
 		else
-			to = 0;
-		this.open(this.arr[to]);
+			this.position = this.arr.length-1;
+				console.log('r1', this.position);
+		this.openIn(this.arr[this.position]);
 	};
 
-	Gallery.prototype.left_arrow = function (to) {
-		if (to < this.arr.length-1)  to++
+	Gallery.prototype.leftArrow = function () {
+		if (this.position > 0)  this.position--
 		else
-			to = 0;
-		this.open(this.arr[to]);
+			this.position = 0;
+		this.openIn(this.arr[this.position]);
 	};
 
 	Gallery.prototype.event = function () {
-			$('#' + this.imageBlockId + ' ' +'img').click(function(e){
+		var self = this;
+			$('#' + this.imageBlockId + ' ' + 'img').on('click', function(e) {
 				e.preventDefault();
-				var element = $(this);
-				$(document).trigger('show', {element: element});
+				var element = jQuery(this).context.outerHTML;
+				self.position = self.arr.indexOf(element);
+				self.openIn(element);
+			});
+
+			$('.popup .arrow-left').on('click', function(e) {
+				console.log('left');
+				self.leftArrow();
+			});
+
+			$(".popup .arrow-right").on('click', function(e) {
+				console.log('right');
+				self.rightArrow();
 			});
 	}
 
