@@ -16,8 +16,8 @@ var Gallery = (function() {
 		this.event();
 	}
 
-	Gallery.prototype.openIn = function (element) {
-		var elementWithArrow = '<button class="arrow-left"> << </button>' + element +'<button class="arrow-right"> >> </button>';
+	Gallery.prototype.open = function (element) {
+		var elementWithArrow = '<div class="arrow-left"></div>' + element +'<div class="arrow-right"></div>';
 		popUp.show(elementWithArrow);
 
 		this.event();
@@ -29,14 +29,14 @@ var Gallery = (function() {
 		else
 			this.position = this.arr.length-1;
 				console.log('r1', this.position);
-		this.openIn(this.arr[this.position]);
+		this.open(this.arr[this.position]);
 	};
 
 	Gallery.prototype.leftArrow = function () {
 		if (this.position > 0)  this.position--
 		else
 			this.position = 0;
-		this.openIn(this.arr[this.position]);
+		this.open(this.arr[this.position]);
 	};
 
 	Gallery.prototype.event = function () {
@@ -45,7 +45,7 @@ var Gallery = (function() {
 				e.preventDefault();
 				var element = jQuery(this).context.outerHTML;
 				self.position = self.arr.indexOf(element);
-				self.openIn(element);
+				self.open(element);
 			});
 
 			$('.popup .arrow-left').on('click', function(e) {

@@ -12,8 +12,20 @@
 		    max-width: 100px;
 		    max-height: 100px;
 		}
-
-		.arrow-left {
+/*gallery*/
+		.arrow-right1 {
+			font-weight:300;
+			font-family:Sans-Serif;
+			position:absolute;
+			right:30px;
+			top:46%;
+			color: #EEE;
+			font-size:4.0em;
+			background-color:rgba(0,0,0,0.5);
+			border-radius:7px;
+			line-height: 1.2em;
+		}
+		.arrow-left1 {
 /*			font-weight:300;
 			font-family:Sans-Serif;
 			position:absolute;
@@ -25,26 +37,48 @@
 			background-color:rgba(0,0,0,0.5);
 			border-radius:7px;
 			line-height: 1.2em;*/
+			background-image: url('css/images.jpg');
 			position:absolute;
-		    top: 50%;
+		    height: 100%;
 		    color: #EEE;
 		    font-size: 4.0em;
 		    background-color: rgba(0,0,0,0.5);
 		    border-radius: 7px;
-		    margin-top: -0.625em;
-		    line-height: 1.2em;
+		//    opacity: 0;
+		}
+
+		.arrow-left {
+		    position: absolute;
+		    top: 40%;
+		    left: 0;
+		    width: 0;
+		    height: 0;
+		    border-top: 50px solid transparent;
+		    border-bottom: 50px solid transparent;
+		    border-right: 50px solid #09c; 
+		    opacity: 0;
+		    cursor: pointer;
 		}
 		.arrow-right {
-			font-weight:300;
-			font-family:Sans-Serif;
-			position:absolute;
-			right:30px;
-			top:46%;
-			color: #EEE;
-			font-size:4.0em;
-			background-color:rgba(0,0,0,0.5);
-			border-radius:7px;
-			line-height: 1.2em;
+		    position: absolute;
+		    top: 40%;
+		    right: 0;
+		    width: 0;
+		    height: 0;
+		    border-top: 50px solid transparent;
+		    border-bottom: 50px solid transparent;
+		    border-left: 50px solid #09c; 
+		    opacity: 0;
+		    cursor: pointer;
+		}
+		.popup-content {
+			position: relative;
+		}
+		.popup .popup-content .arrow-left:hover {
+			opacity: 1;
+		}
+		.popup .popup-content .arrow-right:hover {
+			opacity: 1;
 		}
 	</style>
 </head>
@@ -75,12 +109,7 @@
 <script type="text/javascript" src="gallery.js"></script>
 <script type="text/javascript" src="popup.js"></script>
 <script>
-	var arr1 = [ "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS6ohiCZ5GBPAXQqUfbANS2zw9yNNjCFHOhlytAyv0c9H_RktmGeA",
-		"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgSXX1H1KZhkoN7iGvojgf8PjKi85s7RVEIcwGp2_0UWQy_sFO",
-		"https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcR0W5VRSlJatkF_avlvGPzFeBv0gti5H-dm-wOCop_Y2_bcIKnI",
-		"http://all4desktop.com/data_images/wallpapers/out/345343.jpg",
-		"https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSgXx8uPiVkelYVbt3HG-xgEOPCR5GMZUr8xJO5trF9OAhFiv9mIg"
-	];
+
 
 var gallery = new Gallery({arr: [], imageBlockId: 'thumbs'});
 var popUp = new PopUp();
