@@ -4,119 +4,30 @@
 <head>
   <title>Galery</title>
   <link rel="stylesheet" type="text/css" href="css/gallery.css">
- <link rel="stylesheet" type="text/css" href="css/template.css">
   <meta charset="utf-8">
-	<style>
-
-		#thumbs img {
-		    max-width: 100px;
-		    max-height: 100px;
-		}
-/*gallery*/
-		.arrow-right1 {
-			font-weight:300;
-			font-family:Sans-Serif;
-			position:absolute;
-			right:30px;
-			top:46%;
-			color: #EEE;
-			font-size:4.0em;
-			background-color:rgba(0,0,0,0.5);
-			border-radius:7px;
-			line-height: 1.2em;
-		}
-		.arrow-left1 {
-/*			font-weight:300;
-			font-family:Sans-Serif;
-			position:absolute;
-			z-index:99999999;
-			left:30px;
-			top:46%;
-			color: #EEE;
-			font-size:4.0em;
-			background-color:rgba(0,0,0,0.5);
-			border-radius:7px;
-			line-height: 1.2em;*/
-			background-image: url('css/images.jpg');
-			position:absolute;
-		    height: 100%;
-		    color: #EEE;
-		    font-size: 4.0em;
-		    background-color: rgba(0,0,0,0.5);
-		    border-radius: 7px;
-		//    opacity: 0;
-		}
-
-		.arrow-left {
-		    position: absolute;
-		    top: 40%;
-		    left: 0;
-		    width: 0;
-		    height: 0;
-		    border-top: 50px solid transparent;
-		    border-bottom: 50px solid transparent;
-		    border-right: 50px solid #09c; 
-		    opacity: 0;
-		    cursor: pointer;
-		}
-		.arrow-right {
-		    position: absolute;
-		    top: 40%;
-		    right: 0;
-		    width: 0;
-		    height: 0;
-		    border-top: 50px solid transparent;
-		    border-bottom: 50px solid transparent;
-		    border-left: 50px solid #09c; 
-		    opacity: 0;
-		    cursor: pointer;
-		}
-		.popup-content {
-			position: relative;
-		}
-		.popup .popup-content .arrow-left:hover {
-			opacity: 1;
-		}
-		.popup .popup-content .arrow-right:hover {
-			opacity: 1;
-		}
-	</style>
 </head>
 
 <body>
-<button id="xz">Click me</button>
-
-<a href="#win" title="title"> Start </a>
-
-  <div id="thumbs">
-    <a href="https://js.cx/gallery/img3-lg.jpg" title="Image 2"><img src="https://js.cx/gallery/img2-thumb.jpg"></a>
-    <a href="https://js.cx/gallery/img4-lg.jpg" title="Image 3"><img src="https://js.cx/gallery/img3-thumb.jpg"></a>
-    <a href="https://js.cx/gallery/img5-lg.jpg" title="Image 4"><img src="https://js.cx/gallery/img4-thumb.jpg"></a>
-    <a href="https://js.cx/gallery/img6-lg.jpg" title="Image 5"><img src="https://js.cx/gallery/img5-thumb.jpg"></a>
-    <a href="https://js.cx/gallery/img4-lg.jpg" title="Image 6"><img src="http://www.paupraqualquerobra.com.br/wp-content/uploads/flesh-and-the-devil-moda-e-ciema.jpg"></a>
-    <img src="https://js.cx/gallery/img6-thumb.jpg"/>
-    <img src="https://js.cx/gallery/img4-lg.jpg"/>
-    <img src="http://www.manicard.com/Uploads/Public/388193_10151222318152947_1041028261_n.jpg"/>
-    <img src="https://js.cx/gallery/img4-lg.jpg"/>
-    <img src="http://bizmix.ru/upload/catalog/001/511/95/557043t.jpg"/>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png"/>
-  </div>
+	<h2>Current images</h2>
+	  <div id="thumbs">
+		<a href="https://js.cx/gallery/img3-lg.jpg" title="Image 2"><img src="https://js.cx/gallery/img2-thumb.jpg"></a>
+		<a href="https://js.cx/gallery/img4-lg.jpg" title="Image 3"><img src="https://js.cx/gallery/img3-thumb.jpg"></a>
+		<a href="https://js.cx/gallery/img5-lg.jpg" title="Image 4"><img src="https://js.cx/gallery/img4-thumb.jpg"></a>
+		<a href="https://js.cx/gallery/img6-lg.jpg" title="Image 5"><img src="https://js.cx/gallery/img5-thumb.jpg"></a>
+		<a href="https://js.cx/gallery/img4-lg.jpg" title="Image 6"><img src="http://www.paupraqualquerobra.com.br/wp-content/uploads/flesh-and-the-devil-moda-e-ciema.jpg"></a>
+		<img src="https://js.cx/gallery/img6-thumb.jpg"/>
+		<img src="https://js.cx/gallery/img4-lg.jpg"/>
+		<img src="http://www.manicard.com/Uploads/Public/388193_10151222318152947_1041028261_n.jpg"/>
+		<img src="https://js.cx/gallery/img4-lg.jpg"/>
+		<img src="http://bizmix.ru/upload/catalog/001/511/95/557043t.jpg"/>
+		<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png"/>
+	  </div>
 </body>
 
 </html>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript" src="app.js"></script>
 <script type="text/javascript" src="gallery.js"></script>
-<script type="text/javascript" src="popup.js"></script>
 <script>
-
-
-var gallery = new Gallery({arr: [], imageBlockId: 'thumbs'});
-var popUp = new PopUp();
-gallery.init();
-console.dir(gallery);
-console.dir(popUp);
-//popUp.open('<img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS6ohiCZ5GBPAXQqUfbANS2zw9yNNjCFHOhlytAyv0c9H_RktmGeA"/>');
-
-// $('#xz').on('click', function() {gallery.init()})
+	var gallery = new Gallery({arr: [], imageBlockId: 'thumbs'});
+	gallery.init();
 </script>
