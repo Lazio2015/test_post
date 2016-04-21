@@ -95,19 +95,6 @@
     -o-transform: rotate(360deg);
     transform: rotate(360deg);    
 }
-/* изображени¤ внутри окна */
-
-.popup img {
-    -webkit-user-select: none;
-    /* user-select -- это нестандартное свойство */
-
-    -moz-user-select: none;
-    /* поэтому нужны префиксы */
-
-    -ms-user-select: none;
-    width: 100%;
-    height: auto;
-}
 
 /* миниатюры слева/справа */
 .pic-left, 
@@ -151,12 +138,30 @@
 .popup p {margin: 0;
 }
 
-.popup img {
-    max-width: 400px;
-    max-height: 400px;
-    margin:0 auto;
-    display: block;
+.popup-content {
+    position:   relative;
+    margin:     0 auto;
+    width:      400px;
+    height:     400px;
+    line-height:400px;
 }
+
+/* изображени¤ внутри окна */
+.popup-content img {
+    display: inline-block;
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    vertical-align: middle;
+    line-height: 1.25;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
 /* ARROWS */
 	.arrow-left {
 		position: absolute;
@@ -180,15 +185,10 @@
 		border-bottom: 50px solid transparent;
 		border-left: 50px solid #09c; 
 		opacity: 0;
-		cursor: pointer;
 	}
-	.popup-content {
-		position: relative;
-	}
-	.popup .popup-content .arrow-left:hover {
-		opacity: 1;
-	}
-	.popup .popup-content .arrow-right:hover {
+	.popup .popup-content .arrow-right:hover,
+    .popup .popup-content .arrow-left:hover
+    {
 		opacity: 1;
 	}
 	#thumbs img {

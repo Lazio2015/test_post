@@ -15,7 +15,7 @@ var Gallery = (function() {
 	}
 
 	Gallery.prototype.open = function (element) {
-		var elementWithArrow = '<div class="arrow-left"></div>' + element +'<div class="arrow-right"></div>';
+		var elementWithArrow = '<a href="#" class="arrow-left"></a>' + element +'<a href="#" class="arrow-right"></a>';
 		popUp.show(elementWithArrow);
 
 		this.event();
@@ -58,8 +58,22 @@ var Gallery = (function() {
 })();
 
 var PopUp = (function() {
+    var instance;
+
     function PopUp() {
         this.init();
+        this.abc = 1;
+		if (instance) {
+			console.log(1);
+			return instance;
+		}
+		if (this && this.constructor === PopUp) {
+			console.log(2);
+			instance = this;
+		} else {
+			console.log(3);
+			return new PopUp();
+		}
     }
 
     PopUp.prototype.init = function() {
@@ -75,7 +89,6 @@ var PopUp = (function() {
     };
 
     PopUp.prototype.show = function(content) {
-        //this._popupContent.html('');
     	  if (typeof content === 'string') {
            this._popupContent.html(content);
         } else {
@@ -87,12 +100,8 @@ var PopUp = (function() {
     PopUp.prototype.hide = function() {
         this._overlay.css({display: 'none'});
     };
-
-    var instance = new PopUp();
     
-    return function () {
-        return instance;
-    }
+	return PopUp;
 })();
 
 //init popUp
