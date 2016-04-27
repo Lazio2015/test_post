@@ -15,7 +15,7 @@ var Gallery = (function() {
 	}
 
 	Gallery.prototype.open = function (element) {
-		var elementWithArrow = '<a href="#" class="arrow-left"></a>' + element +'<a href="#" class="arrow-right"></a>';
+		var elementWithArrow = element + '<a href="javascript:;" class="arrows arrow-left"><span></span></a><a href="javascript:;" class="arrows arrow-right"><span></span></a>';
 		popUp.show(elementWithArrow);
 
 		this.event();
