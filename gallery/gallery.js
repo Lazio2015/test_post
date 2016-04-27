@@ -64,14 +64,11 @@ var PopUp = (function() {
         this.init();
         this.abc = 1;
 		if (instance) {
-			console.log(1);
 			return instance;
 		}
 		if (this && this.constructor === PopUp) {
-			console.log(2);
 			instance = this;
 		} else {
-			console.log(3);
 			return new PopUp();
 		}
     }
@@ -79,12 +76,14 @@ var PopUp = (function() {
     PopUp.prototype.init = function() {
         var self = this;
 
-        var TEMPLATE = '<div class="overlay"><div class="popup"><a class="close" title="close" href="#close"></a><div class="popup-content"></div></div></div>';
+        var TEMPLATE = '<div class="overlay"><div class="popup"><button class="close" title="close"></button><div class="popup-content"></div></div></div>';
         this._overlay = $(TEMPLATE).appendTo(document.body);
         this._popup = this._overlay.find('.popup');
+        this._close = this._popup.find('.close');
         this._popupContent = this._overlay.find('.popup-content');
 
         this._overlay.on('click', function() { self.hide(); });
+        this._close.on('click', function() { self.hide(); });
         this._popup.on('click', function(e) { e.stopPropagation(); });
     };
 
