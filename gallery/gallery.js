@@ -15,10 +15,17 @@ var Gallery = (function() {
 	}
 
 	Gallery.prototype.open = function (element) {
+		var self = this;
 		var elementWithArrow = element + '<a href="javascript:;" class="arrows arrow-left"><span></span></a><a href="javascript:;" class="arrows arrow-right"><span></span></a>';
 		popUp.show(elementWithArrow);
 
-		this.event();
+		$('.popup .arrow-left').on('click', function(e) {
+			self.leftArrow();
+		});
+
+		$(".popup .arrow-right").on('click', function(e) {
+			self.rightArrow();
+		});
 	};
 
 	Gallery.prototype.rightArrow = function() {
@@ -38,20 +45,21 @@ var Gallery = (function() {
 
 	Gallery.prototype.event = function () {
 		var self = this;
-			$('#' + this.imageBlockId + ' ' + 'img').on('click', function(e) {
-				e.preventDefault();
-				var element = jQuery(this).context.outerHTML;
-				self.position = self.arr.indexOf(element);
-				self.open(element);
-			});
+		$('#' + this.imageBlockId + ' ' + 'img').on('click', function(e) {
+			e.preventDefault();
+			var element = jQuery(this).context.outerHTML;
+			self.position = self.arr.indexOf(element);
+			self.open(element);
+		});
 
-			$('.popup .arrow-left').on('click', function(e) {
+		$('.popup').on('keyup', function(e) {
+			if (e.keyCode == 37) {
 				self.leftArrow();
-			});
-
-			$(".popup .arrow-right").on('click', function(e) {
+			} else if (e.keyCode == 39){
 				self.rightArrow();
-			});
+			}
+			console.log(e.keyCode);
+		});
 	}
 
 	return Gallery;
@@ -76,7 +84,7 @@ var PopUp = (function() {
     PopUp.prototype.init = function() {
         var self = this;
 
-        var TEMPLATE = '<div class="overlay"><div class="popup"><button class="close" title="close"></button><div class="popup-content"></div></div></div>';
+        var TEMPLATE = '<div class="overlay"><div class="popup" tabindex="0"><button class="close" title="close"></button><div class="popup-content"></div></div></div>';
         this._overlay = $(TEMPLATE).appendTo(document.body);
         this._popup = this._overlay.find('.popup');
         this._close = this._popup.find('.close');
