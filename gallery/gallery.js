@@ -1,6 +1,6 @@
 var Gallery = (function() {
 	function Gallery (options) {
-		this.arr = options.arr ? options.arr : [];
+		this.arrImages = options.arr ? options.arr : [];
 		this.imageBlockId = options.imageBlockId ? options.imageBlockId : '';
 		this.position = -1;
 	}
@@ -9,9 +9,9 @@ var Gallery = (function() {
 		this.imageBlock =  document.getElementById(this.imageBlockId);
 		var images = this.imageBlock.getElementsByTagName('img');
 		for (var i=0; i < images.length; i++ ) {
-			this.arr.push(images[i].outerHTML);
+			this.arrImages.push(images[i].outerHTML);
 		}
-		this.event();
+		this.bindEvent();
 	}
 
 	Gallery.prototype.open = function (element) {
@@ -29,26 +29,23 @@ var Gallery = (function() {
 	};
 
 	Gallery.prototype.rightArrow = function() {
-		if (this.position < this.arr.length-1)  
-			this.position++
-		else
-			this.position = this.arr.length-1;
-		this.open(this.arr[this.position]);
+		if (this.position < this.arrImages.length-1)  
+			this.position++;
+		this.open(this.arrImages[this.position]);
 	};
 
 	Gallery.prototype.leftArrow = function () {
-		if (this.position > 0)  this.position--
-		else
-			this.position = 0;
-		this.open(this.arr[this.position]);
+		if (this.position > 0)  
+			this.position--;
+		this.open(this.arrImages[this.position]);
 	};
 
-	Gallery.prototype.event = function () {
+	Gallery.prototype.bindEvent = function () {
 		var self = this;
 		$('#' + this.imageBlockId + ' ' + 'img').on('click', function(e) {
 			e.preventDefault();
 			var element = jQuery(this).context.outerHTML;
-			self.position = self.arr.indexOf(element);
+			self.position = self.arrImages.indexOf(element);
 			self.open(element);
 		});
 
